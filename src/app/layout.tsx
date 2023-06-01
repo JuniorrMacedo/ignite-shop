@@ -2,6 +2,9 @@ import { ReactNode } from 'react'
 import './globals.css'
 import { Roboto_Flex as Roboto } from 'next/font/google'
 
+import logoImg from '../assets/logo.svg'
+import Image from 'next/image'
+
 const roboto = Roboto({ subsets: ['latin'], variable: '--font-roboto' })
 
 export const metadata = {
@@ -12,7 +15,17 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} font-sans`}>{children}</body>
+      <body
+        className={`${roboto.variable} bg-gray-900 font-sans text-2xl text-gray-100`}
+      >
+        <div className="flex min-h-screen flex-col items-start justify-center">
+          <header className="mx-auto my-0 w-full max-w-[1180px] px-0 py-8">
+            <Image src={logoImg} alt="Ignite Shop" />
+          </header>
+
+          {children}
+        </div>
+      </body>
     </html>
   )
 }
