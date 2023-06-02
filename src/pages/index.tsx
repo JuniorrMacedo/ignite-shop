@@ -1,12 +1,6 @@
-'use client'
-
 import { Product } from '@/components/Product'
 
 import { useKeenSlider } from 'keen-slider/react'
-
-// import TShirt1 from '../assets/camisetas/1.png'
-// import TShirt2 from '../assets/camisetas/2.png'
-// import TShirt3 from '../assets/camisetas/3.png'
 
 import 'keen-slider/keen-slider.min.css'
 import { stripe } from '@/lib/stripe'
