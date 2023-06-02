@@ -8,7 +8,7 @@ interface ProductI {
 
 export function Product({ src, description, value }: ProductI) {
   return (
-    <a className="group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-gradient-to-b from-[#1ea483] to-[#7465d4] p-1">
+    <a className="keen-slider__slide group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-gradient-to-b from-[#1ea483] to-[#7465d4]">
       <Image
         src={src}
         width={520}
