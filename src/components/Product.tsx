@@ -1,9 +1,9 @@
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 
 interface ProductI {
-  src: StaticImageData
+  src: string
   description: string
-  value: string
+  value: number
 }
 
 export function Product({ src, description, value }: ProductI) {
