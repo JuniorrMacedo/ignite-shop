@@ -2,13 +2,13 @@ import Image from 'next/image'
 
 interface ProductI {
   src: string
+  value: string
   description: string
-  value: number
 }
 
 export function Product({ src, description, value }: ProductI) {
   return (
-    <a className="keen-slider__slide group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-gradient-to-b from-[#1ea483] to-[#7465d4]">
+    <div className="keen-slider__slide group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-gradient-to-b from-[#1ea483] to-[#7465d4]">
       <Image
         src={src}
         width={520}
@@ -20,6 +20,6 @@ export function Product({ src, description, value }: ProductI) {
         <strong className="text-xl">{description}</strong>
         <span className="text-2xl font-bold text-green-300">{value}</span>
       </footer>
-    </a>
+    </div>
   )
 }
