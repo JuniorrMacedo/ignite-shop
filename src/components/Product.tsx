@@ -18,7 +18,7 @@ export function Product({ src, description, value }: ProductI) {
       />
       <footer className="absolute bottom-1 left-1 right-1 flex translate-y-full transform items-center justify-between rounded-md bg-black/[0.6] p-8 opacity-0 transition-all duration-200 ease-in-out group-hover:translate-y-0 group-hover:opacity-100">
         <strong className="text-xl">{description}</strong>
-        <span className="text-2xl font-bold text-green-300">R$ {value}</span>
+        <span className="text-2xl font-bold text-green-300">{value}</span>
       </footer>
     </a>
   )
