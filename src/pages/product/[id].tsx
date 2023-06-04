@@ -1,6 +1,8 @@
 import { stripe } from '@/lib/stripe'
+import axios from 'axios'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Image from 'next/image'
+import { useState } from 'react'
 import Stripe from 'stripe'
 
 interface ProductProps {
@@ -10,10 +12,32 @@ interface ProductProps {
     imageUrl: string
     price: string
     description: string
+    defaultPriceId: string
   }
 }
 
 export default function ProductPage({ product }: ProductProps) {
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
+    useState(false)
+
+  async function handleBuyProduct() {
+    try {
+      setIsCreatingCheckoutSession(true)
+
+      const response = await axios.post('/api/checkout', {
+        priceId: product.defaultPriceId,
+      })
+
+      const { checkoutUrl } = response.data
+
+      window.location.href = checkoutUrl
+    } catch (err) {
+      setIsCreatingCheckoutSession(false)
+
+      alert('Falha ao redirecionar!')
+    }
+  }
+
   return (
     <main className="mx-auto my-0 grid max-w-[1180px] grid-cols-2 items-stretch gap-16">
       <div className="flex h-[656px] w-full max-w-[576px] items-center justify-center rounded-lg bg-gradient-to-b from-[#1ea483] to-[#7465d4] p-1">
@@ -36,7 +60,11 @@ export default function ProductPage({ product }: ProductProps) {
           {product.description}
         </p>
 
-        <button className="mt-auto cursor-pointer rounded-lg border-0 bg-green-500 p-5 text-xl font-bold text-white hover:bg-green-300">
+        <button
+          disabled={isCreatingCheckoutSession}
+          onClick={handleBuyProduct}
+          className="mt-auto cursor-pointer rounded-lg border-0 bg-green-500 p-5 text-xl font-bold text-white enabled:hover:bg-green-300 disabled:cursor-not-allowed disabled:opacity-[0.6]"
+        >
           Comprar agora
         </button>
       </div>
@@ -72,6 +100,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
           currency: 'BRL',
         }).format(price.unit_amount! / 100),
         description: product.description,
+        defaultPriceId: price.id,
       },
     },
     revalidate: 60 * 60 * 1,
