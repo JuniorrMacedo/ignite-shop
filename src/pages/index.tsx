@@ -32,7 +32,11 @@ export default function Home({ products }: HomeProps) {
     >
       {products.map((product) => {
         return (
-          <Link href={`/product/${product.id}`} key={product.id}>
+          <Link
+            href={`/product/${product.id}`}
+            key={product.id}
+            prefetch={false}
+          >
             <Product
               src={product.imageUrl}
               description={product.name}
